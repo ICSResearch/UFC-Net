@@ -18,13 +18,7 @@ opt = parser.parse_args()
 opt.device = "cuda:0"
 
 def testing(network, save_img):
-    # datasets = ["McM18", "LIVE29", "OST300"]
-    # datasets = ["SET5_GREY", "Set11_GREY", "McM18_GREY"]
     datasets = ["Set11_GREY", "Set14_GREY", "Urban100_GREY", "General100_GREY"]
-    # datasets = ["McM18_GREY", "LIVE29_GREY"]
-    # datasets = ["General100_GREY"]
-    # datasets = ["test"]
-    # datasets = ["CIFAR10", "CIFAR100"]
     time_all = []
     total_time = 0.
     lpips_model = LPIPS(net='vgg').to(config.device)
@@ -58,16 +52,8 @@ def testing(network, save_img):
                     inputs = torch.cat((inputs, padding_w), 1).unsqueeze(0).unsqueeze(0)
                     inputs = torch.cat(torch.split(inputs, split_size_or_sections=config.block_size, dim=3), dim=0)
                     inputs = torch.cat(torch.split(inputs, split_size_or_sections=config.block_size, dim=2), dim=0).to(config.device)
-                    # print(inputs.shape)
-
-                    # inputs = torch.rand(64, 1, 32, 32).to(config.device)
-                    # start = time.time()
+            
                     reconstruction = network(inputs)
-                    # end = time.time()
-                    # e_t = end - start
-                    # time_all.append(e_t)
-                    # print(e_t)
-                    # total_time += end - start
 
                     idx = expand_w // config.block_size
                     reconstruction = torch.cat(torch.split(reconstruction, split_size_or_sections=1 * idx, dim=0), dim=2)
@@ -108,16 +94,11 @@ def testing(network, save_img):
             print(f"{i} AVG RES: PSNR, {round(sum_psnr / i, 2)}, SSIM, {round(sum_ssim / i, 4)}, LPIPS, {round(sum_lpips / i, 4)}")
 
         avg = total_time / 100
-        # print("average time:", avg)
-        # test = pd.DataFrame(data=time_all)
-        # test.to_csv('time_all_gpu.csv', encoding='gbk')
 
 if __name__=="__main__":
     print("Start evaluate...")
     config = utils.GetConfig(ratio=opt.rate, device=opt.device)
     net = FPC(LayerNo=10, cs_ratio=opt.rate).to(config.device).eval()
-    # checkpoint = torch.load("./results/FPC-Ablation/10demo_woT_UNet/models/net_params_30.pth", map_location=config.device)
-    # net.load_state_dict(checkpoint['net'])
     if os.path.exists(config.model):
         if torch.cuda.is_available():
             trained_model = torch.load(config.model, map_location=config.device)
