@@ -7,4 +7,5 @@ https://drive.google.com/drive/folders/1vBgjCj9As_Uwe3I5rhclddRDQ-Xp05_h?usp=dri
 
 ## Requirements
 > Python == 3.11.5
+
 > PyTorch == 1.12.0
