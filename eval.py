@@ -19,15 +19,13 @@ opt.device = "cuda:0"
 
 def testing(network, save_img):
     datasets = ["Set11_GREY", "Set14_GREY", "Urban100_GREY", "General100_GREY"]
-    time_all = []
-    total_time = 0.
+
     lpips_model = LPIPS(net='vgg').to(config.device)
     for idx, item in enumerate(datasets):
         sum_psnr, sum_ssim = 0., 0.
         sum_lpips = 0.
         i = 0
         path = os.path.join('/home/wcr/WXY/dataset/PNG/Grey', item)
-        # path = os.path.join('E:/dataset/RGB', item)
         print("*", ("  test dataset: " + path + ", device: " + str(config.device) + "  ").center(120, "="), "*")
         with torch.no_grad():
             for root, dir, files in os.walk(path):
@@ -52,8 +50,9 @@ def testing(network, save_img):
                     inputs = torch.cat((inputs, padding_w), 1).unsqueeze(0).unsqueeze(0)
                     inputs = torch.cat(torch.split(inputs, split_size_or_sections=config.block_size, dim=3), dim=0)
                     inputs = torch.cat(torch.split(inputs, split_size_or_sections=config.block_size, dim=2), dim=0).to(config.device)
-            
+
                     reconstruction = network(inputs)
+
 
                     idx = expand_w // config.block_size
                     reconstruction = torch.cat(torch.split(reconstruction, split_size_or_sections=1 * idx, dim=0), dim=2)
@@ -87,13 +86,9 @@ def testing(network, save_img):
                             os.mkdir(img_path)
                             print("\rMkdir {}".format(img_path))
                         cv2.imwrite(f"{img_path}/{name}_{round(psnr, 2)}_{round(ssim, 4)}.png", (im_rec_rgb))
-                        cv2.imwrite(f"{img_path}/{name}_{round(psnr, 2)}_{round(ssim, 4)}_error1.png",
-                                    (error_image_mapped))
-                        cv2.imwrite(f"{img_path}/{name}_{round(psnr, 2)}_{round(ssim, 4)}_error2.png", (error))
 
             print(f"{i} AVG RES: PSNR, {round(sum_psnr / i, 2)}, SSIM, {round(sum_ssim / i, 4)}, LPIPS, {round(sum_lpips / i, 4)}")
 
-        avg = total_time / 100
 
 if __name__=="__main__":
     print("Start evaluate...")
