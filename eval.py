@@ -12,20 +12,18 @@ from skimage.metrics import structural_similarity as SSIM
 from lpips.lpips import *
 
 parser = argparse.ArgumentParser(description="Args of this repo.")
-parser.add_argument("--rate", default=0.25, type=float)
+parser.add_argument("--rate", default=0.04, type=float)
 parser.add_argument("--device", default="0")
 opt = parser.parse_args()
 opt.device = "cuda:0"
 
 def testing(network, save_img):
-    datasets = ["Set11_GREY", "Set14_GREY", "Urban100_GREY", "General100_GREY"]
+    datasets = ["Set11_GREY"]
 
-    lpips_model = LPIPS(net='vgg').to(config.device)
     for idx, item in enumerate(datasets):
         sum_psnr, sum_ssim = 0., 0.
-        sum_lpips = 0.
         i = 0
-        path = os.path.join('/home/wcr/WXY/dataset/PNG/Grey', item)
+        path = os.path.join('G:/dataset/PNG/Grey', item)
         print("*", ("  test dataset: " + path + ", device: " + str(config.device) + "  ").center(120, "="), "*")
         with torch.no_grad():
             for root, dir, files in os.walk(path):
@@ -64,19 +62,12 @@ def testing(network, save_img):
                     psnr = PSNR(x_hat * 255, Iorg_y.astype(np.float64), data_range=255)
                     ssim = SSIM(x_hat * 255, Iorg_y.astype(np.float64), data_range=255)
 
-                    tensor = torch.Tensor(Iorg_y).to(config.device)
-                    lpips = lpips_model(reconstruction * 255, tensor)
-
                     sum_psnr += psnr
                     sum_ssim += ssim
-                    sum_lpips += lpips.item()
 
                     Img_rec_yuv[:,:,0] = x_hat * 255
                     im_rec_rgb = cv2.cvtColor(Img_rec_yuv, cv2.COLOR_YCrCb2BGR)
                     im_rec_rgb = np.clip(im_rec_rgb, 0, 255).astype(np.uint8)
-
-                    error = im_rec_rgb - Img
-                    error_image_mapped = cv2.applyColorMap(error.astype(np.uint8), cv2.COLORMAP_JET)
 
                     if save_img:
                         img_path = "./recon_img/Y/{}/{}/".format(item, int(config.ratio * 100))
@@ -87,7 +78,7 @@ def testing(network, save_img):
                             print("\rMkdir {}".format(img_path))
                         cv2.imwrite(f"{img_path}/{name}_{round(psnr, 2)}_{round(ssim, 4)}.png", (im_rec_rgb))
 
-            print(f"{i} AVG RES: PSNR, {round(sum_psnr / i, 2)}, SSIM, {round(sum_ssim / i, 4)}, LPIPS, {round(sum_lpips / i, 4)}")
+            print(f"{i} AVG RES: PSNR, {round(sum_psnr / i, 2)}, SSIM, {round(sum_ssim / i, 4)}")
 
 
 if __name__=="__main__":
