@@ -8,10 +8,11 @@
 ## 📑 Table of Contents
 1. [Poster & Paper](#poster--paper)
 2. [Supplementary Materials](#supplementary-materials)
-3. [Abstract](#abstract)
-4. [Pretrained Models & Requirements](#pretrained-models--requirements)
-5. [How to Run](#how-to-run)
-6. [Notes & Tips](#notes--tips)
+3. [Video Demo / Presentation](#video-demo--presentation)
+4. [Abstract](#abstract)
+5. [Pretrained Models & Requirements](#pretrained-models--requirements)
+6. [How to Run](#how-to-run)
+7. [Notes & Tips](#notes--tips)
 
 ---
 
@@ -32,10 +33,17 @@
 
 ---
 
-## 📝 Abstract
-> Deep unfolding networks (DUNs), renowned for their interpretability and superior performance, have invigorated the realm of compressive sensing (CS). Nonetheless, existing DUNs frequently suffer from issues related to insufficient feature extraction and feature attrition during the iterative steps. In this paper, we propose Unrolling Fixed‑point Continuous Network (UFC‑Net), a novel deep CS framework motivated by the traditional fixed-point continuous optimization algorithm. Specifically, we introduce Convolution‑guided Attention Module (CAM) to serve as a critical constituent within the reconstruction phase, encompassing tailored components such as Multi-head Attention Residual Block (MARB), Auxiliary Iterative Reconstruction Block (AIRB), etc. MARB effectively integrates multi‑head attention mechanisms with convolution to reinforce feature extraction, transcending the confinement of localized attributes and facilitating the apprehension of long-range correlations. Meanwhile, AIRB introduces auxiliary variables, significantly bolstering the preservation of features within each iterative stage. Extensive experiments demonstrate that our proposed UFC‑Net achieves remarkable performance both on image CS and CS‑MRI in contrast to state-of-the-art methods.
+## 🎥 Video Demo / Presentation
 
-*(TL;DR: better reconstruction + stable training + impressive feature preservation.)*
+Check out the official video demonstration on YouTube:  
+[![UFC‑Net Demo](https://img.youtube.com/vi/vaZjIJOCE4g/0.jpg)](https://www.youtube.com/watch?time_continue=2&v=vaZjIJOCE4g&embeds_referring_euri=https%3A%2F%2Fcvpr.thecvf.com%2F)
+
+> Click the thumbnail to watch the demo — it gives an intuitive overview of UFC‑Net performance on image CS and CS-MRI tasks.  
+
+---
+
+## 📝 Abstract
+> Deep unfolding networks (DUNs), renowned for their interpretability and superior performance, have invigorated the realm of compressive sensing (CS). Nonetheless, existing DUNs frequently suffer from issues related to insufficient feature extraction and feature attrition during the iterative steps. In this paper, we propose Unrolling Fixed‑point Continuous Network (UFC‑Net), a novel deep CS framework motivated by the traditional fixed-point continuous optimization algorithm. Specifically, we introduce Convolution‑guided Attention Module (CAM) to serve as a critical constituent within the reconstruction phase, encompassing tailored components such as Multi-head Attention Residual Block (MARB), Auxiliary Iterative Reconstruction Block (AIRB), etc. MARB effectively integrates multi-head attention mechanisms with convolution to reinforce feature extraction, transcending the confinement of localized attributes and facilitating the apprehension of long-range correlations. Meanwhile, AIRB introduces auxiliary variables, significantly bolstering the preservation of features within each iterative stage. Extensive experiments demonstrate that our proposed UFC‑Net achieves remarkable performance both on image CS and CS‑MRI in contrast to state-of-the-art methods.
 
 ---
 
@@ -46,23 +54,16 @@
   - Python == 3.11.5  
   - PyTorch == 1.12.0  
 
-*(Make sure to use the correct PyTorch version to avoid compatibility issues.)*
-
 ---
 
 ## ⚙️ How to Run
 
 ```bash
-# Clone repo
 git clone https://github.com/ICSResearch/UFC-Net.git
 cd UFC-Net
 
-# Install dependencies
 pip install -r requirements.txt
 
 # Run training / testing
-# Example: Image Compressive Sensing
 python train_image_cs.py --config configs/your_config.yaml
-
-# Example: CS-MRI
 python train_mri_cs.py --config configs/mri_config.yaml
