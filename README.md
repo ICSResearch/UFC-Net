@@ -76,3 +76,13 @@ python train_image_cs.py --config configs/your_config.yaml
 
 # Example: CS-MRI
 python train_mri_cs.py --config configs/mri_config.yaml
+
+
+@InProceedings{Wang_2024_CVPR,
+  author    = {Xiaoyang Wang and Hongping Gan},
+  title     = {UFC‑Net: Unrolling Fixed-point Continuous Network for Deep Compressive Sensing},
+  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year      = {2024},
+  pages     = {25149–25159}
+}
+
