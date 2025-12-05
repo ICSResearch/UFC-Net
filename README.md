@@ -76,7 +76,7 @@ python train_image_cs.py --config configs/your_config.yaml
 
 # Example: CS-MRI
 python train_mri_cs.py --config configs/mri_config.yaml
-
+```
 ## 📚 If this code is helpful, please cite
 If you find UFC‑Net useful in your research, please cite the original paper:
 @InProceedings{Wang_2024_CVPR,
