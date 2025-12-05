@@ -13,24 +13,25 @@
 5. [Pretrained Models & Requirements](#pretrained-models--requirements)
 6. [How to Run](#how-to-run)
 7. [Notes & Tips](#notes--tips)
-8. [Citation](#citation)
+8. [If this code is helpful, please cite](#if-this-code-is-helpful-please-cite)
 
 ---
 
 ## 🖼️ Poster & Paper
 
 **UFC‑Net Poster (CVPR 2024)**  
-![UFC‑Net Poster](./posters/UFC-Net_poster.png)  <!-- 将 poster 下载到该路径 -->
+![UFC‑Net Poster](./posters/UFC-Net_poster.png)  <!-- 下载后放在该路径 -->
 
 **Official Paper:**  
-- PDF: [CVPR 2024 Paper](https://openaccess.thecvf.com/content/CVPR2024/papers/Wang_UFC-Net_Unrolling_Fixed-point_Continuous_Network_for_Deep_Compressive_Sensing_CVPR_2024_paper.pdf)  
-- Poster Page: [CVPR Virtual Poster #91](https://cvpr.thecvf.com/virtual/2024/poster/30588)  
+- [CVPR 2024 Paper PDF](https://openaccess.thecvf.com/content/CVPR2024/papers/Wang_UFC-Net_Unrolling_Fixed-point_Continuous_Network_for_Deep_Compressive_Sensing_CVPR_2024_paper.pdf)  
+- [CVPR Virtual Poster #91](https://cvpr.thecvf.com/virtual/2024/poster/30588)  
 
 ---
 
 ## 📄 Supplementary Materials
-- PDF: [Supplementary File](https://openaccess.thecvf.com/content/CVPR2024/supplemental/Wang_UFC-Net_Unrolling_Fixed-point_CVPR_2024_supplemental.pdf)  
-*(Contains additional ablation studies, implementation details, and visualizations.)*
+
+- [Supplementary PDF](https://openaccess.thecvf.com/content/CVPR2024/supplemental/Wang_UFC-Net_Unrolling_Fixed-point_CVPR_2024_supplemental.pdf)  
+*Contains additional ablation studies, implementation details, and visualizations.*
 
 ---
 
@@ -38,14 +39,24 @@
 
 Check out the official YouTube video:  
 [![UFC‑Net Demo](https://img.youtube.com/vi/vaZjIJOCE4g/0.jpg)](https://www.youtube.com/watch?time_continue=2&v=vaZjIJOCE4g&embeds_referring_euri=https%3A%2F%2Fcvpr.thecvf.com%2F)  
+
 > Click the thumbnail to watch the demo — see UFC‑Net’s performance on image CS and CS-MRI tasks.
 
 ---
 
 ## 📝 Abstract
-> Deep unfolding networks (DUNs), renowned for their interpretability and superior performance, have invigorated the realm of compressive sensing (CS). Nonetheless, existing DUNs frequently suffer from issues related to insufficient feature extraction and feature attrition during the iterative steps. In this paper, we propose Unrolling Fixed‑point Continuous Network (UFC‑Net), a novel deep CS framework motivated by the traditional fixed-point continuous optimization algorithm. Specifically, we introduce Convolution‑guided Attention Module (CAM) to serve as a critical constituent within the reconstruction phase, encompassing tailored components such as Multi-head Attention Residual Block (MARB), Auxiliary Iterative Reconstruction Block (AIRB), etc. MARB effectively integrates multi-head attention mechanisms with convolution to reinforce feature extraction, transcending the confinement of localized attributes and facilitating the apprehension of long-range correlations. Meanwhile, AIRB introduces auxiliary variables, significantly bolstering the preservation of features within each iterative stage. Extensive experiments demonstrate that our proposed UFC‑Net achieves remarkable performance both on image CS and CS‑MRI in contrast to state-of-the-art methods.
 
-*(TL;DR: better reconstruction, stable training, impressive feature preservation.)*
+Deep unfolding networks (DUNs), renowned for their interpretability and superior performance, have invigorated the realm of compressive sensing (CS). Nonetheless, existing DUNs frequently suffer from insufficient feature extraction and feature attrition during iterative steps.  
+
+We propose **Unrolling Fixed‑point Continuous Network (UFC‑Net)**, a novel deep CS framework inspired by fixed-point continuous optimization algorithms. Key components include:
+
+- **Convolution-guided Attention Module (CAM):** Reinforces feature extraction.  
+- **Multi-head Attention Residual Block (MARB):** Integrates multi-head attention with convolution to capture long-range correlations.  
+- **Auxiliary Iterative Reconstruction Block (AIRB):** Introduces auxiliary variables to preserve features during iterations.  
+
+Extensive experiments show **UFC‑Net** achieves superior performance on both image CS and CS-MRI compared to state-of-the-art methods.  
+
+*TL;DR: Better reconstruction, stable training, and impressive feature preservation.*
 
 ---
 
@@ -56,7 +67,7 @@ Check out the official YouTube video:
   - Python == 3.11.5  
   - PyTorch == 1.12.0  
 
-*(Ensure correct PyTorch version to avoid compatibility issues.)*
+*⚠️ Ensure correct PyTorch version to avoid compatibility issues.*
 
 ---
 
@@ -71,10 +82,10 @@ cd UFC-Net
 pip install -r requirements.txt
 
 # Run training / testing
-# Example: Image Compressive Sensing
+# Image Compressive Sensing
 python train_image_cs.py --config configs/your_config.yaml
 
-# Example: CS-MRI
+# CS-MRI
 python train_mri_cs.py --config configs/mri_config.yaml
 ```
 ## 📚 If this code is helpful, please cite
