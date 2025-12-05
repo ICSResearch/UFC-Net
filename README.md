@@ -79,6 +79,7 @@ python train_mri_cs.py --config configs/mri_config.yaml
 ```
 ## 📚 If this code is helpful, please cite
 If you find UFC‑Net useful in your research, please cite the original paper:
+```bash
 @InProceedings{Wang_2024_CVPR,
   author    = {Xiaoyang Wang and Hongping Gan},
   title     = {UFC‑Net: Unrolling Fixed-point Continuous Network for Deep Compressive Sensing},
@@ -86,4 +87,5 @@ If you find UFC‑Net useful in your research, please cite the original paper:
   year      = {2024},
   pages     = {25149–25159}
 }
+```
 
